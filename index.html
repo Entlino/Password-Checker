@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Strength Checker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Password Checker</h1>
+
+      <input type="password" id="password" placeholder="Enter password" />
+
+      <div class="strength-display" id="strengthText"></div>
+
+      <div class="icon" id="icon"></div>
+    </div>
+    <script>
+      const passwordInput = document.getElementById("password");
+      const strengthText = document.getElementById("strengthText");
+      const icon = document.getElementById("icon");
+
+      function checkPassword(password) {
+        if (password.length === 0) {
+          strengthText.textContent = "";
+          strengthText.className = "strength-display";
+          icon.className = "";
+          return;
+        }
+        let score = 0;
+
+        if (password.length >= 8) score++;
+
+        if (/[A-Z]/.test(password)) score++;
+
+        if (/[a-z]/.test(password)) score++;
+
+        if (/\d/.test(password)) score++;
+
+        if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
+
+        icon.classList.remove("shake", "bounce");
+
+        if (score <= 2) {
+          strengthText.textContent = "Weak";
+          strengthText.className = "strength-display weak";
+          icon.textContent = "❌";
+          setTimeout(() => icon.classList.add("shake"), 10);
+        } else if (score === 3 || score === 4) {
+          strengthText.textContent = "Medium";
+          strengthText.className = "strength-display medium";
+          icon.textContent = "⚠️";
+        } else {
+          strengthText.textContent = "Strong";
+          strengthText.className = "strength-display strong";
+          icon.textContent = "✅";
+          setTimeout(() => icon.classList.add("bounce"), 10);
+        }
+      }
+
+      passwordInput.addEventListener("input", function () {
+        checkPassword(passwordInput.value);
+      });
+    </script>
+  </body>
+</html>
