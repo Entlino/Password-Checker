@@ -60,6 +60,51 @@ h1 {
   animation: bounce 0.3s;
 }
 
+.requirements {
+  text-align: left;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.requirement-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.requirement.met .requirement-icon {
+  background: #2ed573;
+  color: white;
+  transform: scale(1.1);
+}
+
+.requirement:not(.met) .requirement-icon {
+  background: #ff4757;
+  color: white;
+}
+
+.requirement.met {
+  color: #2ed573;
+}
+
+.requirement:not(.met) {
+  color: #666;
+}
 @keyframes shake {
   0% {
     transform: translateX(0);
